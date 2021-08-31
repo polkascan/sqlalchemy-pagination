@@ -1,16 +1,32 @@
 import re
 
-try:  # for pip >= 10
-    from pip._internal.req import parse_requirements
-except ImportError:  # for pip <= 9.0.3
-    from pip.req import parse_requirements
+# try:  # for pip >= 10
+#     from pip._internal.req import parse_requirements
+# except ImportError:  # for pip <= 9.0.3
+#     from pip.req import parse_requirements
+
+try:
+    # newest versions.
+    # pip>=21.x.x
+    from pip._internal.req.constructors import (
+        install_req_from_parsed_requirement,
+    )
+except ImportError:
+    # pip<=20.x.x
+    def install_req_from_parsed_requirement(x):
+        return x
+
 
 from setuptools import setup, find_packages
 
 
 def requirements(filename):
-    reqs = parse_requirements(filename, session=False)
-    return [str(r.req) for r in reqs]
+    # reqs = parse_requirements(filename, session=False)
+    # return [str(r.req) for r in reqs]
+    # read your requirements.
+    install_reqs = parse_requirements(requirements_path, session=False)
+    # for pip==21.x.x convert ParsedRequirement into InstallRequirement.
+    return [install_req_from_parsed_requirement(req) for req in install_reqs]
 
 
 def get_version():
