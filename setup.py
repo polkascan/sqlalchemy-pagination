@@ -24,7 +24,7 @@ def requirements(filename):
     # reqs = parse_requirements(filename, session=False)
     # return [str(r.req) for r in reqs]
     # read your requirements.
-    install_reqs = parse_requirements(requirements_path, session=False)
+    install_reqs = parse_requirements(filename, session=False)
     # for pip==21.x.x convert ParsedRequirement into InstallRequirement.
     return [install_req_from_parsed_requirement(req) for req in install_reqs]
 
