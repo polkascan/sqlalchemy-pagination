@@ -21,12 +21,20 @@ from setuptools import setup, find_packages
 
 
 def requirements(filename):
+
     # reqs = parse_requirements(filename, session=False)
     # return [str(r.req) for r in reqs]
     # read your requirements.
     install_reqs = parse_requirements(filename, session=False)
+    install_reqs = list(install_reqs)
+    #requirements = list(requirements)
+    try:
+        requirements = [str(ir.req) for ir in install_reqs]
+    except:
+        requirements = [str(ir.requirement) for ir in install_reqs]
+
     # for pip==21.x.x convert ParsedRequirement into InstallRequirement.
-    return [install_req_from_parsed_requirement(req) for req in install_reqs]
+    return [install_req_from_parsed_requirement(req) for req in requirements]
 
 
 def get_version():
