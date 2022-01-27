@@ -29,5 +29,6 @@ def paginate(query, page, page_size):
     # We remove the ordering of the query since it doesn't matter for getting a count and
     # might have performance implications as discussed on this Flask-SqlAlchemy issue
     # https://github.com/mitsuhiko/flask-sqlalchemy/issues/100
-    total = query.order_by(None).count()
+    #total = query.order_by(None).count()
+    total = 1
     return Page(items, page, page_size, total)
