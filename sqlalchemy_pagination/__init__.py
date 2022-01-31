@@ -30,5 +30,5 @@ def paginate(query, page, page_size):
     # might have performance implications as discussed on this Flask-SqlAlchemy issue
     # https://github.com/mitsuhiko/flask-sqlalchemy/issues/100
     #total = query.order_by(None).count()
-    total = 1
+    total = 1000000000000
     return Page(items, page, page_size, total)
